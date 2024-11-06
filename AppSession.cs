@@ -16,6 +16,7 @@ namespace AutomationUITest
         //the best way to do this is with an ObservableCollection, as this also automatically updates the UI
         //and so does not require an OnPropertyChanged statement
         public ObservableCollection<Command> CommandList { get; set; }
+        public string TestText;
 
         ////these must be initialised and is best done in a constructor
         public AppSession()
@@ -23,7 +24,10 @@ namespace AutomationUITest
             CommandList = new ObservableCollection<Command>();
 
             //We can add items directly into the command list here if we desire and they will show up on app start
-            //CommandList.Add(CommandCreator);
+            CommandList.Add(CommandCreator.CreateCommand());/*CommandID, CommandType,CommandValues*/
+            CommandList.Add(CommandCreator.CreateCommand());
+            CommandList.Add(CommandCreator.CreateCommand());
+            TestText = string.Concat(CommandList[0]);
         }
 
         public void AddCommand()

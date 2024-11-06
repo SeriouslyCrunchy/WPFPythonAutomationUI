@@ -11,9 +11,9 @@ namespace AutomationUITest
     {
         //private values are required here as we cannot use auto-properties to pass values to the viewer
         private int _commandID;
-        private string? _name;
         private List<int> _values;
         private string _textValue;
+        public CommandType CommandType { get; set; }
 
         //getters simply return whatever value is in the associated private variable
         //setters set the private value to whatever value is passed in, and also activate the OnPropertyChanged method, using the associated value name
@@ -25,16 +25,6 @@ namespace AutomationUITest
             {
                 _commandID = value;
                 OnPropertyChanged(nameof(CommandID));
-            }
-        }
-
-        public string? Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -58,9 +48,12 @@ namespace AutomationUITest
             }
         }
 
-        public Command() 
-        { 
-
+        public Command(int commandID, CommandType commandType, List<int> values, string textValues)
+        {
+            CommandID = commandID;
+            CommandType = commandType;
+            Values = values;
+            TextValue = textValues;
         }
 
         //this must be activated each time you need to change something in the UI otherwise it wont update
