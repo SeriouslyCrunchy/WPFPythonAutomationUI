@@ -16,19 +16,19 @@ namespace AutomationUITest
     /// </summary>
     public partial class MainWindow : Window
     {
-        //new instance of AppSession class (which handles the button clicks as it is an instance of INotifyPropertyChanged
-        AppSession NewAppSession;
+        //new instance of AppSession class (which handles the button clicks as it is an instance of INotifyPropertyChanged)
+        AppSession NewAppSession = new AppSession();
         public MainWindow()
         {
-            //set datacontext to AppSession class
+            //set datacontext to AppSession class which is handling the vast majority of UI
             InitializeComponent();
-            NewAppSession = new AppSession();
             DataContext = NewAppSession;
         }
+        //click events
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
             NewAppSession.AddCommand();
-
+            
         }
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,8 @@ namespace AutomationUITest
 {
     internal class Command : INotifyPropertyChanged
     {
-        //private values are required here as we cannot use auto-properties to pass values to the viewer
+        //private values are required here as we must use public values to send to the UI, however the best way to update those values is to use 
+        //private values to update the public values, and we can then call OnPropertyChanged on the public value
         private int _commandID;
         private List<int> _values;
         private string _textValue;
@@ -17,7 +19,7 @@ namespace AutomationUITest
 
         //getters simply return whatever value is in the associated private variable
         //setters set the private value to whatever value is passed in, and also activate the OnPropertyChanged method, using the associated value name
-        //adjusting the onpropertychanged values to be more efficent by removing strings
+        //can also adjusting the onpropertychanged values to be more efficent by removing strings
         public int CommandID
         {
             get { return _commandID; }
@@ -47,6 +49,8 @@ namespace AutomationUITest
                 OnPropertyChanged(nameof(TextValue));
             }
         }
+
+        //constructor for each new command class
 
         public Command(int commandID, CommandType commandType, List<int> values, string textValues)
         {

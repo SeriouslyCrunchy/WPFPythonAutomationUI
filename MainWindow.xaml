@@ -24,7 +24,9 @@
             <Button Grid.Row="0" Grid.Column="0" 
             Margin="10" 
             Click="ButtonAdd_OnClick"
-            Content="Add Action"/>
+            Content="Add Action"
+            Cursor="Hand"
+            x:Name="AddButton"/>
             <Button Grid.Row="0" Grid.Column="1" 
             Margin="10" 
             Click="ButtonDel_OnClick"
@@ -53,10 +55,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="5"/>
-                <DataGrid ItemsSource="{Binding NewAppSession.CommandList}"
+                <DataGrid ItemsSource="{Binding Path = CommandList}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID"
+                            Binding="{Binding CommandID}"
+                            Width="auto"/>
                         <DataGridTextColumn Header="Command"
                                                 Binding="{Binding CommandType}"
                                                 Width="*"/>
@@ -67,8 +72,16 @@
                 </DataGrid>
                 <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="5">
                 <Grid Grid.Row="0" Grid.Column="1" Background="White">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Menu Grid.Row="0" Grid.Column="0" Width="100" Height="50" />
+                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Height="50"/>
+                        </Grid>
                         <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="5"/>
-                        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding NewAppSession.TestText}"/>
+                        <TextBox Grid.Row="1" Grid.Column="0" x:Name="TextBox" Text="{Binding Path=OutputText}"/>
                         <Grid.RowDefinitions>
                        <RowDefinition Height="*"/>
                        <RowDefinition Height="150"/>
