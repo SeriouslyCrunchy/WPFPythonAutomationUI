@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,8 +15,8 @@ namespace AutomationUITest
     //must inherit INotifyPropertyChanged for UI updating
     class AppSession : INotifyPropertyChanged
     {
-
-
+        //required here so we can adjust the command type based on user selection
+        public CommandType CommandChosen;
 
         //private values are required here as we must use public values to send to the UI, however the best way to update those values is to use 
         //private values to update the public values, and we can then call OnPropertyChanged on the public value
@@ -27,6 +28,17 @@ namespace AutomationUITest
             {
                 outputText = value;
                 OnPropertyChanged("OutputText");
+            }
+        }
+
+        private string listSelectText;
+        public string ListSelectText
+        {
+            get { return listSelectText; }
+            set
+            {
+                listSelectText = value;
+                OnPropertyChanged("ListSelectText");
             }
         }
 
@@ -43,7 +55,7 @@ namespace AutomationUITest
             CommandList = new ObservableCollection<Command>();
 
             //We can add items directly into the command list here if we desire and they will show up on app start
-            CommandList.Add(CommandCreator.CreateCommand(currentCommand, CommandType.EnterText, null, "TextValues"));/*CommandID, CommandType,CommandValues*/
+            //CommandList.Add(CommandCreator.CreateCommand(currentCommand, CommandType.EnterText, null, "TextValues"));/*CommandID, CommandType,CommandValues*/
             currentCommand++;
 
             
@@ -53,9 +65,30 @@ namespace AutomationUITest
 
         public void AddCommand()
         {
-            CommandList.Add(CommandCreator.CreateCommand(currentCommand, CommandType.EnterText, null, "TextValues2"));
+            //add comments here
+            if (ListSelectText == "System.Windows.Controls.ListBoxItem: Enter Text")
+            {
+                //
+                CommandChosen = CommandType.EnterText;
+            }
+            //add comments here
+            else if (ListSelectText == "System.Windows.Controls.ListBoxItem: Click")
+            {
+                //
+                CommandChosen = CommandType.Click;
+            }
+            //add comments here
+            else if (ListSelectText == "System.Windows.Controls.ListBoxItem: Drag")
+            {
+                //
+                CommandChosen = CommandType.Drag;
+            }
+
+            CommandList.Add(CommandCreator.CreateCommand(currentCommand, CommandChosen, null, null));
             string OutputTextLine = string.Concat(CommandList[0]);
+
             OutputText += (OutputTextLine);
+            OutputText += (ListSelectText);
             OutputText += (Environment.NewLine);
             OnPropertyChanged("OutputText");
             currentCommand++;
@@ -63,6 +96,7 @@ namespace AutomationUITest
         public void DeleteCommand()
         {
             CommandList.RemoveAt(CommandList.Count-1);
+            currentCommand--;
 
         }
         public void SaveCommands()
@@ -81,6 +115,11 @@ namespace AutomationUITest
 
         }
         public void ClearCommands()
+        {
+
+
+        }
+        public void UpdateSelected()
         {
 
 

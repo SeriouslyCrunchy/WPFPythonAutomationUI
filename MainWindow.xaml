@@ -77,8 +77,12 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Menu Grid.Row="0" Grid.Column="0" Width="100" Height="50" />
-                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Height="50"/>
+                            <ListBox Grid.Row="0" Grid.Column="0" Name="TypeListBox" SelectionMode="Single" SelectionChanged="ListSelection_OnChanged" Width="100" Height="200" >
+                                <ListBoxItem Content="Click"/>
+                                <ListBoxItem Content="Drag"/>
+                                <ListBoxItem Content="Enter Text"/>
+                            </ListBox>
+                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Height="50" Text="{Binding Path=ListSelectText}" />
                         </Grid>
                         <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="5"/>
                         <TextBox Grid.Row="1" Grid.Column="0" x:Name="TextBox" Text="{Binding Path=OutputText}"/>

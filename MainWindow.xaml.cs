@@ -55,6 +55,13 @@ namespace AutomationUITest
             NewAppSession.ClearCommands();
 
         }
+        private void ListSelection_OnChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (TypeListBox.SelectedItem != null)
+                NewAppSession.ListSelectText = TypeListBox.SelectedItem.ToString();
+                NewAppSession.UpdateSelected();
+
+        }
 
     }
 }
