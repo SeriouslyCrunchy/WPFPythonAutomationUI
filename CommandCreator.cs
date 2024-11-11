@@ -11,9 +11,9 @@ namespace AutomationUITest
     internal static class CommandCreator
     {
         //basic command creator, this takes in values passed in and creates a new command based off them
-        public static Command CreateCommand(int CommandID, CommandType commandtype, List<int> IntValues, string TextValues)
+        public static Command CreateCommand(int CommandID, CommandType commandtype, string Values)
         {
-            Command command = new Command(CommandID, commandtype, IntValues, TextValues);
+            Command command = new Command(CommandID, commandtype, Values);
             return command;
 
         }

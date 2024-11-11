@@ -27,7 +27,15 @@ namespace AutomationUITest
         //click events
         private void ButtonAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            NewAppSession.AddCommand();
+            string InputValues1 = ValueText1.Text;
+            string InputValues2 = ValueText2.Text;
+            string InputValues3 = ValueText3.Text;
+            string InputValues4 = ValueText4.Text;
+            string[] InputValuesAll = new string[]{ InputValues1 , InputValues2 , InputValues3 , InputValues4 };
+            if (InputValues1 != "")
+            {
+                NewAppSession.AddCommand(InputValuesAll);
+            }
             
         }
         private void ButtonDel_OnClick(object sender, RoutedEventArgs e)
@@ -55,6 +63,8 @@ namespace AutomationUITest
             NewAppSession.ClearCommands();
 
         }
+
+        //this activates every time the item in the list selected changed
         private void ListSelection_OnChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (TypeListBox.SelectedItem != null)

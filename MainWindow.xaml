@@ -55,7 +55,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="5"/>
-                <DataGrid ItemsSource="{Binding Path = CommandList}"
+                <DataGrid IsReadOnly="True" ItemsSource="{Binding Path = CommandList}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                     <DataGrid.Columns>
@@ -66,7 +66,7 @@
                                                 Binding="{Binding CommandType}"
                                                 Width="*"/>
                         <DataGridTextColumn Header="Values"
-                                                Binding="{Binding TextValue}"
+                                                Binding="{Binding CommandValues}"
                                                 Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -74,18 +74,38 @@
                 <Grid Grid.Row="0" Grid.Column="1" Background="White">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <ListBox Grid.Row="0" Grid.Column="0" Name="TypeListBox" SelectionMode="Single" SelectionChanged="ListSelection_OnChanged" Width="100" Height="200" >
                                 <ListBoxItem Content="Click"/>
                                 <ListBoxItem Content="Drag"/>
                                 <ListBoxItem Content="Enter Text"/>
+                                <ListBoxItem Content="Wait"/>
                             </ListBox>
-                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Height="50" Text="{Binding Path=ListSelectText}" />
+                            <Grid Grid.Row="0" Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Name="LabelText1" Width="100" Height="50" Content="Value 1" />
+                                <TextBox Grid.Row="0" Grid.Column="1" Name="ValueText1" Width="100" Height="50" Text="{Binding Path=CommandValue1Text}" />
+                                <Label Grid.Row="1" Grid.Column="0" Name="LabelText2" Width="100" Height="50" Content="Value 2" />
+                                <TextBox Grid.Row="1" Grid.Column="1" Name="ValueText2" Width="100" Height="50" Text="{Binding Path=CommandValue2Text}" />
+                                <Label Grid.Row="2" Grid.Column="0" Name="LabelText3" Width="100" Height="50" Content="Value 3" />
+                                <TextBox Grid.Row="2" Grid.Column="1" Name="ValueText3" Width="100" Height="50" Text="{Binding Path=CommandValue3Text}" />
+                                <Label Grid.Row="3" Grid.Column="0" Name="LabelText4" Width="100" Height="50" Content="Value 4" />
+                                <TextBox Grid.Row="3" Grid.Column="1" Name="ValueText4" Width="100" Height="50" Text="{Binding Path=CommandValue4Text}" />
+                            </Grid>
                         </Grid>
                         <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="5"/>
-                        <TextBox Grid.Row="1" Grid.Column="0" x:Name="TextBox" Text="{Binding Path=OutputText}"/>
+                        <TextBox Grid.Row="1" Grid.Column="0" IsReadOnly="True" x:Name="TextBox" Text="{Binding Path=OutputText}"/>
                         <Grid.RowDefinitions>
                        <RowDefinition Height="*"/>
                        <RowDefinition Height="150"/>

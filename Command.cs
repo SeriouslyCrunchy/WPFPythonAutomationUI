@@ -13,8 +13,7 @@ namespace AutomationUITest
         //private values are required here as we must use public values to send to the UI, however the best way to update those values is to use 
         //private values to update the public values, and we can then call OnPropertyChanged on the public value
         private int _commandID;
-        private List<int> _values;
-        private string _textValue;
+        private string _values;
         public CommandType CommandType { get; set; }
 
         //getters simply return whatever value is in the associated private variable
@@ -30,7 +29,7 @@ namespace AutomationUITest
             }
         }
 
-        public List<int> Values
+        public string Values
         {
             get { return _values; }
             set
@@ -40,24 +39,13 @@ namespace AutomationUITest
             }
         }
 
-        public string TextValue
-        {
-            get { return _textValue; }
-            set
-            {
-                _textValue = value;
-                OnPropertyChanged(nameof(TextValue));
-            }
-        }
-
         //constructor for each new command class
 
-        public Command(int commandID, CommandType commandType, List<int> values, string textValues)
+        public Command(int commandID, CommandType commandType, string values)
         {
             CommandID = commandID;
             CommandType = commandType;
             Values = values;
-            TextValue = textValues;
         }
 
         //this must be activated each time you need to change something in the UI otherwise it wont update
