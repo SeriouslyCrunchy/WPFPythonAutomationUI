@@ -64,10 +64,9 @@ namespace AutomationUITest
             CommandList = new ObservableCollection<Command>();
 
             //We can add items directly into the command list here if we desire and they will show up on app start
-            //CommandList.Add(CommandCreator.CreateCommand(currentCommand, CommandType.EnterText, null, "TextValues"));/*CommandID, CommandType,CommandValues*/
+            CommandList.Add(CommandCreator.CreateCommand(currentCommand, CommandType.EnterText, "TextValues"));/*CommandID, CommandType,CommandValues*/
             currentCommand++;
 
-            
         }
 
         //functions for button click commands
@@ -130,7 +129,8 @@ namespace AutomationUITest
         }
         public void ClearCommands()
         {
-
+            CommandList.Clear();
+            currentCommand = 1;
 
         }
         public void UpdateSelected()
